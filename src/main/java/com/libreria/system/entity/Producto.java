@@ -3,6 +3,7 @@ package com.libreria.system.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -15,21 +16,45 @@ public class Producto {
     private Long id;
 
     @Column(nullable = false)
-    private String nomb;
+    private String nombre;
+
+    private String marca;
+
+    private String modelo;
+
+    private String color;
 
     @Column(length = 200)
-    private String descrip;
+    private String descripcion;
 
     @Column(nullable = false)
     private BigDecimal precio;
 
     @Column(nullable = false)
-    private Integer stock;
+    private Integer stock = 0;
 
-    private String codBarras;
+    @Column(unique = true)
+    private String codigoBarras;
+
+    private LocalDateTime fechaCreacion;
+    private LocalDateTime fechaActualizacion;
+
+    @PrePersist
+    public void prePersist(){
+        fechaCreacion = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void preUpdate(){
+        fechaActualizacion = LocalDateTime.now();
+    }
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
+
+    @ManyToOne
+    @JoinColumn(name="proveedor_id")
+    private Proveedor proveedor;
 
 }

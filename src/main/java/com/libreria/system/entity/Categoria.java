@@ -15,9 +15,9 @@ public class Categoria {
     private Long id;
 
     @Column(nullable = false)
-    private String nomb;
+    private String nombre;
 
     @Column(length = 200)
-    private String descrip;
+    private String descripcion;
 
 }
