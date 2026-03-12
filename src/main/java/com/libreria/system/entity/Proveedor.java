@@ -7,7 +7,7 @@ import org.hibernate.Length;
 @Entity
 @Data
 @Table(name = "Proveedores")
-public class Proveedor {
+public class Proveedor extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

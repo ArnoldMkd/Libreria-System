@@ -3,13 +3,12 @@ package com.libreria.system.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 
 @Entity
 @Data
 @Table(name="productos")
-public class Producto {
+public class Producto extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,21 +32,8 @@ public class Producto {
     @Column(nullable = false)
     private Integer stock = 0;
 
-    @Column(unique = true)
+    @Column(unique = true, length = 50)
     private String codigoBarras;
-
-    private LocalDateTime fechaCreacion;
-    private LocalDateTime fechaActualizacion;
-
-    @PrePersist
-    public void prePersist(){
-        fechaCreacion = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    public void preUpdate(){
-        fechaActualizacion = LocalDateTime.now();
-    }
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
